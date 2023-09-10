@@ -90,7 +90,7 @@ function sendJs()
 {
   console.log("sendjs")
   console.log("HELOOOO", toSend)
-  fetch('http://3.106.170.74:3000/receive', {
+  fetch('http://localhost:3000/receive', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
