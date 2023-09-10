@@ -8,6 +8,19 @@ const port = process.env.PORT || 3000;
 
 // Serve static files (e.g., index.html) from the "public" directory
 app.use(express.static('public'));
+app.use(express.json());
+
+app.get('/voicerec.js', (req, res) => {
+  res.type('application/javascript');
+  res.sendFile(__dirname + '/public/voicerec.js');
+});
+
+app.post('/receive', (req, res) => {
+  const data = req.body; // Data sent from voicerec.js
+  console.log('Data received on the server:', data);
+  // Process the data or perform actions as needed
+  res.sendStatus(200); // Send a response back to voicerec.js
+});
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
@@ -96,9 +109,6 @@ async function searchProductsBySubstringReg(substring) {
       throw err;
     }
   }
-  
-
-
 
 
 
@@ -110,25 +120,23 @@ async function searchProductsBySubstringReg(substring) {
 //     console.error('Error:', err);
 // })
 
-const productList = ["1 kilo chicken"]
+// const productList = ["1 kilo chicken"]
 
+function sendToScript(data) {
+  console.log("DATAAAA", data)
+}
 
-for (let i = 0; i < productList.length; i++) {
-  //   const products = searchProductsBySubstring(productList[i])
-  //   .then((matchingProducts) => {
-  //     console.log('Matching products NON REG:', matchingProducts[0]);
-  // })
-  //   .catch((err) => {
-  //     console.error('Error:', err);
-  // })
+async function productSearch(productList) {
+  for (let i = 0; i < productList.length; i++) {
+      const products = searchProductsBySubstring(productList[i])
+      .then((matchingProducts) => {
+        console.log('Matching products NON REG:', matchingProducts[0]);
+    })
+      .catch((err) => {
+        console.error('Error:', err);
+    })
 
-  const products2 = searchProductsBySubstringReg(productList[i])
-  .then((matchingProducts) => {
-    console.log('Matching products REG:', matchingProducts[0]);
-})
-  .catch((err) => {
-    console.error('Error:', err);
-})
+  }
 }
 
 

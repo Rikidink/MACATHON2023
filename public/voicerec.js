@@ -82,14 +82,31 @@ function compileSend(event) {
   var unique = dump.filter((value, index, arr) => arr.indexOf(value) === index);
   console.log("UNIQUE")
   console.log(unique)
-toSend = unique
-sendJs()
+  toSend = unique
+  sendJs()
 }
 
 function sendJs()
 {
-console.log("sendjs")
-console.log(toSend)
-  return toSend
+  console.log("sendjs")
+  console.log("HELOOOO", toSend)
+  fetch('http://localhost:3000/receive', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(toSend),
+  })
+  .then((response) => {
+    if (response.ok) {
+        console.log('Data sent successfully');
+    } else {
+        console.error('Failed to send data');
+    }
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
 }
+
 
