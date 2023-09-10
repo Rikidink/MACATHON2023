@@ -45,8 +45,7 @@ img {
 
 /* Hero Section */
 header.hero {
-  background: rgb(233,193,249);
-  background: linear-gradient(90deg, rgba(233,193,249,1) 0%, rgba(207,91,224,1) 48%, rgba(111,45,224,1) 100%);
+  background: url(../assets/ATLAS_final.png) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

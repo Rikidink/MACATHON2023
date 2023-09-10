@@ -8,8 +8,8 @@ recognition.continuous = true  ;
 recognition.lang = 'en-US';
 recognition.interimResults = false;
 
-var diagnostic = document.querySelector('.output');
-var hints = document.querySelector('.hints');
+var diagnostic = document.querySelector('#listen');
+
 
 document.querySelector("#start").onclick = function() {
   recognition.start();
@@ -40,7 +40,7 @@ recognition.onresult = function(event) {
   }}}
 
 recognition.onspeechend = function() {
-  document.querySelector("#status").textContent ="Done..."
+  document.querySelector("#status").textContent ="Done!"
   console.log("Speech has Ended")
   
 }
