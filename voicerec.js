@@ -1,6 +1,7 @@
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 var dump =[]
+var toSend =[]
 
 var recognition = new SpeechRecognition();
 
@@ -81,7 +82,14 @@ function compileSend(event) {
   var unique = dump.filter((value, index, arr) => arr.indexOf(value) === index);
   console.log("UNIQUE")
   console.log(unique)
-  return unique
+toSend = unique
+sendJs()
 }
 
+function sendJs()
+{
+console.log("sendjs")
+console.log(toSend)
+  return toSend
+}
 
