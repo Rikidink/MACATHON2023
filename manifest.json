@@ -1,0 +1,11 @@
+{
+    "name": "Atlas",
+    "version": "1.0.0",
+    "description": "Coles shopping assistant",
+    "manifest_version": 3,
+    "author": "Ricky Zhang",
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "Atlas Shopping Extension"
+    }
+}
