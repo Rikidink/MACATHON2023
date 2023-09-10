@@ -2,6 +2,17 @@ const mongoose = require('mongoose');
 // const url = 'mongodb+srv://mac:MACATHON123@grocerycatalogue.pxtqfsc.mongodb.net/?retryWrites=true&w=majority'
 const url = 'mongodb+srv://mac:MACATHON123@grocerycatalogue.pxtqfsc.mongodb.net/catalog?retryWrites=true&w=majority'
 
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Serve static files (e.g., index.html) from the "public" directory
+app.use(express.static('public'));
+
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
+
 
 
 mongoose.connect(url).
