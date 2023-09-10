@@ -9,6 +9,8 @@ recognition.lang = 'en-US';
 recognition.interimResults = false;
 
 var diagnostic = document.querySelector('#listen');
+var output = document.querySelector('#output');
+
 
 
 document.querySelector("#start").onclick = function() {
@@ -34,7 +36,7 @@ recognition.onresult = function(event) {
     console.log("Done!!")
     recognition.stop();
     document.querySelector("#status").textContent ="Finished"
-    compile(event)
+    compileSend(event)
     
 
   }}}
@@ -60,13 +62,25 @@ recognition.onerror = function(event) {
 function compileSend(event) {
   for (let index = 0; index < event.results.length; index++) {
     dump.push(event.results[index][0].transcript)
+   
     
   }
+
   dump.pop()
+
+  var toJoin = dump.map(function (t, i) {
+    return (i+1) +". "+ t + "\n"+ "\n"+ "\n"+ "\n"
+  })
+
+  document.getElementById('output').innerHTML = 
+  "Here's what I heard: "+"\n"+ '<h3>' + toJoin.join('</h3><h3>') + '</h3>'
+
+
   console.log("ORIGINAL") 
   console.log(dump)
   var unique = dump.filter((value, index, arr) => arr.indexOf(value) === index);
   console.log("UNIQUE")
+  console.log(unique)
   return unique
 }
 
