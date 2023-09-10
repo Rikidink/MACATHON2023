@@ -1,8 +1,12 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 // const url = 'mongodb+srv://mac:MACATHON123@grocerycatalogue.pxtqfsc.mongodb.net/?retryWrites=true&w=majority'
 const url = 'mongodb+srv://mac:MACATHON123@grocerycatalogue.pxtqfsc.mongodb.net/catalog?retryWrites=true&w=majority'
 
-const express = require('express');
+
+// const express = require('express');
+import express from 'express';
+import open from 'open';
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -19,6 +23,7 @@ app.post('/receive', (req, res) => {
   const data = req.body; // Data sent from voicerec.js
   console.log('Data received on the server:', data);
   // Process the data or perform actions as needed
+  productSearch(data)
   res.sendStatus(200); // Send a response back to voicerec.js
 });
 
@@ -79,13 +84,6 @@ async function searchProductsBySubstring(substring) {
             },
           },
         },
-        {
-          $project: {
-            _id: 0, // Exclude _id field from results
-            Product_Name: 1, // Include the Product_Name field
-            score: { $meta: 'searchScore' }, // Include the search score
-          },
-        },
       ]);
   
       return products;
@@ -95,47 +93,19 @@ async function searchProductsBySubstring(substring) {
     }
 }
 
-async function searchProductsBySubstringReg(substring) {
-    try {
-      // Create a regular expression pattern to search for the substring (case-insensitive)
-      const regexPattern = new RegExp(substring, 'i');
-  
-      // Use Mongoose to find documents that match the regex pattern
-      const products = await Product.find({ Product_Name: { $regex: regexPattern } });
-  
-      return products;
-    } catch (err) {
-      console.error('Error searching for products:', err);
-      throw err;
-    }
-  }
-
-
-
-// const products = searchProductsBySubstring("chicken breast")
-//   .then((matchingProducts) => {
-//     console.log('Matching products:', matchingProducts);
-// })
-//   .catch((err) => {
-//     console.error('Error:', err);
-// })
-
-// const productList = ["1 kilo chicken"]
-
-function sendToScript(data) {
-  console.log("DATAAAA", data)
-}
 
 async function productSearch(productList) {
   for (let i = 0; i < productList.length; i++) {
       const products = searchProductsBySubstring(productList[i])
       .then((matchingProducts) => {
         console.log('Matching products NON REG:', matchingProducts[0]);
+        const url = matchingProducts[0].Product_Url;
+        open(url);
+        open("https://www.coles.com.au/search?q=" + productList[i]);
     })
       .catch((err) => {
         console.error('Error:', err);
     })
-
   }
 }
 

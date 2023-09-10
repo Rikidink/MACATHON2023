@@ -13,6 +13,7 @@
     "express": "^4.18.2",
     "mongodb": "6.0",
     "mongoose": "^7.5.0",
-    "mongoose-atlas-search": "^1.0.11"
+    "mongoose-atlas-search": "^1.0.11",
+    "open": "^9.1.0"
   }
 }
