@@ -100,8 +100,8 @@ async function productSearch(productList) {
       .then((matchingProducts) => {
         console.log('Matching products NON REG:', matchingProducts[0]);
         const url = matchingProducts[0].Product_Url;
-        open(url);
-        open("https://www.coles.com.au/search?q=" + productList[i]);
+        open(url, {app: {name: 'google chrome'}});
+        open("https://www.coles.com.au/search?q=" + productList[i], {app: {name: 'google chrome'}});
     })
       .catch((err) => {
         console.error('Error:', err);
