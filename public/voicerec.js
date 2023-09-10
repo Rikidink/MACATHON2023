@@ -9,7 +9,7 @@ recognition.continuous = true  ;
 recognition.lang = 'en-US';
 recognition.interimResults = false;
 
-var diagnostic = document.querySelector('#listen');
+var diagnostic = document.querySelector('#status');
 var output = document.querySelector('#output');
 
 
